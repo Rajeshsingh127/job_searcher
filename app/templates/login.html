@@ -1,0 +1,23 @@
+{% extends 'findjobs.html' %}
+
+{% block title %}Signup{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-md-3">
+    <a class="btn btn-outline-dark" href="{{ url_for('login_oauth.googlelogin')}}" role="button" style="text-transform:none">
+      <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+      Login with Google
+    </a>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3">
+      <a class="btn btn-outline-dark" href="{{ url_for('login_oauth.githublogin')}}" role="button" style="text-transform:none">
+      <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/512px-Octicons-mark-github.svg.png" />
+      Login with Github
+    </a>
+  </div>
+</div>
+
+
+{% endblock %}

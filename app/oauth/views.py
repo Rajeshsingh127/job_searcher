@@ -34,7 +34,9 @@ def googleauthorize():
     user_info = resp.json()
     # do something with the token and profile
     session['email'] = user_info['email']
-    return token
+    session['name'] = user_info['name']
+
+    return session['email']
 
 #login functionality with github
 
@@ -64,4 +66,5 @@ def githubauthorize():
     user_info = resp.json()
     # do something with the token and profile
     session['email'] = user_info['email']
-    return token
+    session['name'] = user_info['name']
+    return session['email']
