@@ -22,25 +22,32 @@
 
 
 <div>
-    <form action="" method="post">
+    <form action="{{ url_for('login.signup_process') }}" method="post">
          {{ form.hidden_tag() }}
         <p>
                 {{ form.email.label }}<br>
                 {{ form.email }}<br>
+                {% for error in form.email.errors %}
+                <span style="color: red;">{{error}}</span>
+                {% endfor %}
 
 
         </p>
         <p>
                 {{form.password.label }}<br>
                 {{form.password }}<br>
-
+                {% for error in form.password.errors %}
+                <span style="color: red;">{{error}}</span>
+                {% endfor %}
 
         </p>
 
           <p>
                 {{form.password_check.label }}<br>
                 {{form.password_check }}<br>
-
+                {% for error in form.password_check.errors %}
+                <span style="color: red;">{{error}}</span>
+                {% endfor %}
 
         </p>
         <p>
@@ -52,7 +59,7 @@
 
 
     </form>
-    <p>Have an account <a href="{{ url_for('login') }}">login here </a></p>
+    <p>Have an account ? <a href="{{ url_for('login') }}">login here </a></p>
 
 
 </div>

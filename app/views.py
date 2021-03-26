@@ -1,6 +1,6 @@
 from app import app
 from flask import render_template,request,url_for,redirect,session
-from app.login.forms import Loginform,Signupform
+from app.login_check.forms import Loginform,Signupform
 @app.route('/login')
 def login():
     form = Loginform()

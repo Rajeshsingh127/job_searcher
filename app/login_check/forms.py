@@ -15,5 +15,5 @@ class Loginform(FlaskForm):
 class Signupform(FlaskForm):
     email = EmailField('Email', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
-    password_check = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo(password)])
+    password_check = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password',message='password must be equal')])
     submit = SubmitField('Signup')
