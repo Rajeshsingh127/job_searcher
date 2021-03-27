@@ -1,14 +1,18 @@
 from app import app
 from flask import render_template,request,url_for,redirect,session
+from flask_login import login_required,current_user
 from app.login_check.forms import Loginform,Signupform
 @app.route('/login')
 def login():
     form = Loginform()
     return render_template('login.html',form=form)
 
+
 @app.route('/profile')
+@login_required
 def profile():
-    return render_template('userprofile.html')
+    name = current_user.name
+    return render_template('userprofile.html',name=name)
 
 @app.route('/')
 def findjobs():

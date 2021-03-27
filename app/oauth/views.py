@@ -1,6 +1,9 @@
 from flask import Blueprint,url_for,session,redirect,request
+from flask_login import login_user
 from authlib.integrations.flask_client import OAuth
-from app import app
+from werkzeug.security import generate_password_hash,check_password_hash
+from passgen import passgen
+from app import app,User,db
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -33,11 +36,18 @@ def googleauthorize():
     resp.raise_for_status()
     user_info = resp.json()
     # do something with the token and profile
-    session['email'] = user_info['email']
-    session['name'] = user_info['name']
-
-    return session['email']
-
+    email = user_info['email']
+    password = passgen(20)
+    name = user_info['name']
+    user = User.query.filter_by(email=email).first()
+    if user is not None:
+        login_user(user)
+    else:
+        user = User(name=name, email=email, password=generate_password_hash(password))
+        db.session.add(user)
+        db.session.commit()
+        login_user(user)
+    return redirect(url_for('findjobs'))
 #login functionality with github
 
 github = oauth.register(
@@ -65,6 +75,15 @@ def githubauthorize():
     resp.raise_for_status()
     user_info = resp.json()
     # do something with the token and profile
-    session['email'] = user_info['email']
-    session['name'] = user_info['name']
-    return session['email']
+    email = user_info['email']
+    password = passgen(20)
+    name = user_info['name']
+    user = User.query.filter_by(email=email).first()
+    if user is not None:
+        login_user(user)
+    else:
+        user = User(name=name, email=email, password=generate_password_hash(password))
+        db.session.add(user)
+        db.session.commit()
+        login_user(user)
+    return redirect(url_for('findjobs'))

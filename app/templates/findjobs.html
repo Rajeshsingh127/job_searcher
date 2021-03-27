@@ -14,9 +14,17 @@
 </script>
 </head>
 <body>
-<a href="{{ url_for('login') }}">SignIn</a>
+
+
+
 <a href="{{ url_for('findjobs') }}">Find Jobs</a>
+{% if current_user.is_authenticated %}
 <a href="{{ url_for('profile') }}">Profile</a>
+<a href="{{ url_for('login.logout') }}">Logout</a>
+{% else %}
+<a href="{{ url_for('login') }}">SignIn</a>
+{% endif %}
+<a href="#">About Us</a>
 {% block content %}
 
 
