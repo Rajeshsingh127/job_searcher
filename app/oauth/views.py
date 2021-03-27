@@ -41,12 +41,12 @@ def googleauthorize():
     name = user_info['name']
     user = User.query.filter_by(email=email).first()
     if user is not None:
-        login_user(user)
+        login_user(user,remember=True)
     else:
         user = User(name=name, email=email, password=generate_password_hash(password))
         db.session.add(user)
         db.session.commit()
-        login_user(user)
+        login_user(user,remember=True)
     return redirect(url_for('findjobs'))
 #login functionality with github
 
@@ -80,10 +80,10 @@ def githubauthorize():
     name = user_info['name']
     user = User.query.filter_by(email=email).first()
     if user is not None:
-        login_user(user)
+        login_user(user,remember=True)
     else:
         user = User(name=name, email=email, password=generate_password_hash(password))
         db.session.add(user)
         db.session.commit()
-        login_user(user)
+        login_user(user,remember=True)
     return redirect(url_for('findjobs'))
