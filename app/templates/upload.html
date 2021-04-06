@@ -1,0 +1,46 @@
+{% extends 'findjobs.html' %}
+
+{% block title %}Upload file{% endblock %}
+
+{% block content %}
+<div>
+<form method="post" action="{{ url_for('upload.upload_process') }}", enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <p>
+    {{ form.name.label }}<br>
+    {{ form.name }}<br>
+        {% for error in form.name.errors %}
+                <span style="color: red;">{{error}}</span>
+        {% endfor %}
+    </p>
+
+    <p>
+    {{ form.pic.label }}<br>
+    {{ form.pic }}<br>
+        {% for error in form.name.errors %}
+                <span style="color: red;">{{error}}</span>
+        {% endfor %}
+    </p>
+
+    <p>
+    {{ form.about.label }}<br>
+    {{ form.about }}<br>
+        {% for error in form.name.errors %}
+                <span style="color: red;">{{error}}</span>
+        {% endfor %}
+
+    </p>
+
+    <p>
+    {{ form.submit }}<br>
+        {% for error in form.name.errors %}
+                <span style="color: red;">{{error}}</span>
+        {% endfor %}
+
+    </p>
+
+
+
+</form>
+</div>
+{% endblock %}
