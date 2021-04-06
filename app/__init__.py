@@ -15,17 +15,19 @@ app.config['UPLOAD_EXTENSIONS'] = ['.jpg','.png','.jpeg']
 app.config['UPLOAD_FOLDER'] = os.path.abspath('app')+'/static/images'
 db = SQLAlchemy(app)
 migrate = Migrate(app,db)
-from app.models import User
+from app.models import User,Upload
 
+#import blueprints
 from app.oauth.views import login_oauth
 from app.login_check import login
 from app.upload import upload
+from app.display import display
 
 #blueprints
 app.register_blueprint(login_oauth,url_prefix='/oauth_login')
 app.register_blueprint(login,url_prefix='/loginsimple')
 app.register_blueprint(upload,url_prefix='/upload')
-
+app.register_blueprint(display)
 
 
 from app import views

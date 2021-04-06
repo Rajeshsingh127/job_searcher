@@ -1,5 +1,5 @@
 import os
-from app import app
+from app import app,Upload,db
 from flask import request,abort,redirect,url_for,current_app
 from flask_login import current_user
 from app.upload import upload
@@ -21,4 +21,10 @@ def upload_process():
                 if file_ext not in current_app.config['UPLOAD_EXTENSIONS']:
                     abort(400)
                 pic.save(os.path.join(current_app.config['UPLOAD_FOLDER'],filename))
+
+            address = os.path.abspath(filename)
+            #saving in db part
+            user = Upload(name=name,about=about,pic=address,author=current_user)
+            db.session.add(user)
+            db.session.commit()
         return redirect(url_for('findjobs'))

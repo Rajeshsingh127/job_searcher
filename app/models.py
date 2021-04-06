@@ -21,6 +21,7 @@ class Upload(UserMixin,db.Model):
     id = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(40),nullable=False)
     about = db.Column(db.String(500),nullable=False)
+    pic = db.Column(db.String(200),nullable=False)
     time = db.Column(db.DateTime,default=datetime.utcnow())
     user_id = db.Column(db.Integer,db.ForeignKey('Userinfo.id'))
 
