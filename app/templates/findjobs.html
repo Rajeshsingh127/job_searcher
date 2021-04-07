@@ -17,7 +17,7 @@
 
 
 
-<a href="{{ url_for('findjobs') }}">Gallery</a>
+<a href="{{ url_for('display.show_post') }}">Gallery</a>
 {% if current_user.is_authenticated %}
 <a href="{{ url_for('upload') }}">Upload</a>
 <a href="{{ url_for('profile') }}">Profile</a>
@@ -28,6 +28,12 @@
 <a href="#">About Us</a>
 {% block content %}
 
+
+{% for post in posts %}
+    <img src="{{ post.pic }}" width="100px" height="100px">
+<h1>{{ post.name }}</h1>
+
+{% endfor %}
 
 
 {% endblock %}

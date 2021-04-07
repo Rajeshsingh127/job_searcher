@@ -21,10 +21,9 @@ def upload_process():
                 if file_ext not in current_app.config['UPLOAD_EXTENSIONS']:
                     abort(400)
                 pic.save(os.path.join(current_app.config['UPLOAD_FOLDER'],filename))
-
-            address = os.path.abspath(filename)
+            address = '/static/images/{}'.format(filename)
             #saving in db part
             user = Upload(name=name,about=about,pic=address,author=current_user)
             db.session.add(user)
             db.session.commit()
-        return redirect(url_for('findjobs'))
+        return redirect(url_for('display.show_post'))

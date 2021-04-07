@@ -18,10 +18,10 @@ def profile():
     name = current_user.name
     return render_template('userprofile.html',name=name)
 
-@app.route('/')
+""""@app.route('/')
 def findjobs():
     return render_template('findjobs.html')
-
+"""
 
 @app.route('/signup')
 def signup():

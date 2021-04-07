@@ -27,7 +27,7 @@ from app.display import display
 app.register_blueprint(login_oauth,url_prefix='/oauth_login')
 app.register_blueprint(login,url_prefix='/loginsimple')
 app.register_blueprint(upload,url_prefix='/upload')
-app.register_blueprint(display)
+app.register_blueprint(display,url_prefix='/display')
 
 
 from app import views
