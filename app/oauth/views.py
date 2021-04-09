@@ -47,7 +47,7 @@ def googleauthorize():
         db.session.add(user)
         db.session.commit()
         login_user(user,remember=True)
-    return redirect(url_for('findjobs'))
+    return redirect(url_for('display.show_post'))
 #login functionality with github
 
 github = oauth.register(
@@ -86,4 +86,4 @@ def githubauthorize():
         db.session.add(user)
         db.session.commit()
         login_user(user,remember=True)
-    return redirect(url_for('findjobs'))
+    return redirect(url_for('display.show_post'))

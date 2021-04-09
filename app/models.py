@@ -8,6 +8,7 @@ class User(UserMixin,db.Model):
     email = db.Column(db.String(40),unique=True,nullable=False)
     password = db.Column(db.String(200), nullable=False)
     posts = db.relationship('Upload',backref='author',lazy='dynamic')
+    comment = db.relationship('Comments',backref='poster',lazy='dynamic')
     def __init__(self,name,email,password):
         self.name = name
         self.email = email
@@ -23,7 +24,20 @@ class Upload(UserMixin,db.Model):
     about = db.Column(db.String(500),nullable=False)
     pic = db.Column(db.String(200),nullable=False)
     time = db.Column(db.DateTime,default=datetime.utcnow())
+    likes = db.Column(db.Integer,default=0)
     user_id = db.Column(db.Integer,db.ForeignKey('Userinfo.id'))
+    comments = db.relationship('Comments',backref='post',lazy='dynamic')
+
+
+class Comments(UserMixin,db.Model):
+    __tablename__ = 'commentdata'
+    id = db.Column(db.Integer,primary_key=True)
+    comment = db.Column(db.String(400),nullable=False)
+    time = db.Column(db.DateTime,default=datetime.utcnow())
+    userid = db.Column(db.Integer,db.ForeignKey('Userinfo.id'))
+    post_id = db.Column(db.Integer,db.ForeignKey('uploadata.id'))
+
+
 
 @log_in.user_loader
 def load_user(id):

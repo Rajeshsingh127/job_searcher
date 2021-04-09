@@ -17,7 +17,7 @@ def login_process():
         user = User.query.filter_by(email=email).first()
         if user is not None and check_password_hash(user.password,password):
             login_user(user,remember=remember_me)
-            return redirect(url_for('findjobs'))
+            return redirect(url_for('display.show_post'))
         else:
             return redirect(url_for('login'))
 
@@ -36,7 +36,8 @@ def signup_process():
         user = User(name=name,email=email,password=generate_password_hash(password))
         db.session.add(user)
         db.session.commit()
-        return redirect(url_for('login'))
+        login_user(user,remember=True)
+        return redirect(url_for('display.show_post'))
 
     return redirect(url_for('signup'))
 
@@ -46,4 +47,4 @@ def signup_process():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('findjobs'))
+    return redirect(url_for('display.show_post'))

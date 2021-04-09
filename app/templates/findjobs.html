@@ -27,13 +27,23 @@
 {% endif %}
 <a href="#">About Us</a>
 {% block content %}
-
-
+<div class="post">
 {% for post in posts %}
-    <img src="{{ post.pic }}" width="100px" height="100px">
-<h1>{{ post.name }}</h1>
+
+    <div class="extends">
+    <a href="{{url_for('postextends',id=post.id)}}">
+    <div>
+    <br><img src="{{ post.pic }}" width="150px" height="150px">
+    </div>
+    <div><p>Likes: {{post.likes}}</p></div>
+    <div><p>Pet name: {{post.name}}</p></div>
+    <div><p>Owner: {{post.author.name}}</p></div>
+    </a>
+    </div>
+
 
 {% endfor %}
+</div>
 
 
 {% endblock %}
