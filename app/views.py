@@ -12,12 +12,6 @@ def login():
     return render_template('login.html',form=form)
 
 
-@app.route('/profile')
-@login_required
-def profile():
-    name = current_user.name
-    return render_template('userprofile.html',name=name)
-
 
 
 @app.route('/signup')

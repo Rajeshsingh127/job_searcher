@@ -2,5 +2,36 @@
 
 {% block title %}Profile{% endblock %}
 {% block content %}
-{{name}}
+
+<h1>{{user.name}}</h1>
+
+
+<div class="editprofile">
+    {% if current_user.id == user.id %}
+    <a href="{{url_for('profile.edit_account') }}">Edit Account</a>
+      <a href="{{url_for('profile.delete_account') }}">Delete Account</a>
+    {% endif %}
+
+
+
+</div>
+
+<h2>MY POSTS</h2>
+<div class="post">
+{% for post in user.posts %}
+
+    <div class="extends">
+    <a href="{{url_for('postextends',id=post.id)}}">
+    <div>
+    <br><img src="{{ post.pic }}" width="150px" height="150px">
+    </div></a>
+    <div><p>Likes: <a href="{{url_for('display.likes',postid=post.id)}}">{{post.likes}}</a></p></div>
+    <div><p>Pet name: {{post.name}}</p></div>
+    <div><p>Owner: <a href="{{url_for('profile.profile_view',author=post.author.id)}}">{{post.author.name}}</a></p></div>
+    </a>
+    </div>
+
+
+{% endfor %}
+</div>
 {% endblock %}

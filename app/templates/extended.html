@@ -4,16 +4,20 @@
 {% block content %}
 
     <div><img src="{{ post.pic }}" width="150px" height="150px"></div>
-    <div><p>Likes: {{post.likes}}</p></div>
+    <div><p>Likes: <a href="{{url_for('display.likes',postid=post.id)}}">{{post.likes}}</a> </p></div>
     <div><p>Pet name: {{post.name}}</p></div>
     <div><p>Owner: {{post.author.name}}</p></div>
     <div><p>ABOUT: {{post.about}}</p></div>
-    <div><p>Date Posted: {{post.time}}</p></div>
+    <div><p>Date Posted: {{post.time.date()}}</p></div>
+<hr>
     <div class="comments">
+        <h3>COMMENTS</h3>
+        <hr>
         {% for comment in post.comments %}
-        <p>{{comment.poster.name}}</p>
-        <p>Posted on:{{comment.time}}</p>
-        <p>Comments: {{comment.comment}}</p>
+        <h4>{{comment.poster.name}}</h4>
+        Posted on:{{comment.time.date()  }}</p>
+        <p>Comment: {{comment.comment}}</p>
+        <hr>
         {% endfor %}
     </div>
 

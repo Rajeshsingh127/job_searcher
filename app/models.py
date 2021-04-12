@@ -37,6 +37,11 @@ class Comments(UserMixin,db.Model):
     userid = db.Column(db.Integer,db.ForeignKey('Userinfo.id'))
     post_id = db.Column(db.Integer,db.ForeignKey('uploadata.id'))
 
+class Likes(UserMixin,db.Model):
+    __tablename__ = 'likedata'
+    id = db.Column(db.Integer,primary_key=True)
+    userid = db.Column(db.Integer,db.ForeignKey('Userinfo.id'))
+    post_id = db.Column(db.Integer,db.ForeignKey('uploadata.id'))
 
 
 @log_in.user_loader

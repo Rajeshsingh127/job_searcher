@@ -23,14 +23,14 @@ from app.login_check import login
 from app.upload import upload
 from app.display import display
 from app.comments import comments
-
+from app.profile import profile
 #blueprints
 app.register_blueprint(login_oauth,url_prefix='/oauth_login')
 app.register_blueprint(login,url_prefix='/loginsimple')
 app.register_blueprint(upload,url_prefix='/upload')
 app.register_blueprint(display)
 app.register_blueprint(comments,url_prefix='/comments')
-
+app.register_blueprint(profile,url_prefix='/profile')
 
 from app import views,models
 
