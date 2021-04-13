@@ -17,4 +17,4 @@ def comment_process():
         brr = Comments(comment=comment,userid=user,post=post)
         db.session.add(brr)
         db.session.commit()
-        return redirect(url_for('display.show_post'))
+        return redirect(request.referrer)

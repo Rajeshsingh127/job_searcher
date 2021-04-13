@@ -1,4 +1,4 @@
-from flask import redirect,url_for,session,render_template
+from flask import redirect,url_for,session,render_template,request
 from app import db
 from app.display import display
 from app.models import Upload,Comments,User,Likes
@@ -19,10 +19,10 @@ def likes(postid):
         db.session.delete(check)
         add.likes -= 1
         db.session.commit()
-        return redirect(url_for('postextends', id=post_id))
+        return redirect(request.referrer)
     else:
         poop = Likes(userid=current_user.id, post_id=int(post_id))
         db.session.add(poop)
         add.likes += 1
         db.session.commit()
-        return redirect(url_for('postextends', id=post_id))
+        return redirect(request.referrer)

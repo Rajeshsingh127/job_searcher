@@ -1,0 +1,13 @@
+{% extends 'findjobs.html' %}
+
+{% block title %}Upload file{% endblock %}
+
+{% block content %}
+
+<h4>DO you want to delete {{post.name }}'s Post ?</h4>
+<img src="{{post.pic}}" height="150px" width="150px"><br>
+<a href="{{url_for('upload.delete_process')}}">YES</a>
+<a href="{{request.referrer}}">NO</a>
+
+
+{% endblock %}

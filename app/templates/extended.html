@@ -9,6 +9,11 @@
     <div><p>Owner: {{post.author.name}}</p></div>
     <div><p>ABOUT: {{post.about}}</p></div>
     <div><p>Date Posted: {{post.time.date()}}</p></div>
+    <div>{% if current_user.id == post.author.id %}
+            <a href="{{url_for('upload.edit_post',id=post.id)}}">edit </a>
+            <a href="{{url_for('upload.delete_post',id=post.id)}}">delete</a>
+         {% endif %}
+    </div>
 <hr>
     <div class="comments">
         <h3>COMMENTS</h3>
