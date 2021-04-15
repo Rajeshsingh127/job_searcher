@@ -22,6 +22,9 @@
         <h4>{{comment.poster.name}}</h4>
         Posted on:{{comment.time.date()  }}</p>
         <p>Comment: {{comment.comment}}</p>
+        {% if comment.userid == current_user.id %}
+        <a href="{{url_for('comments.delete_process',id=comment.id)}}">delete</a>
+        {% endif %}
         <hr>
         {% endfor %}
     </div>

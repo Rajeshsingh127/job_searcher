@@ -2,7 +2,7 @@ from flask import redirect,url_for,session,render_template,request
 from app import db
 from app.display import display
 from app.models import Upload,Comments,User,Likes
-from flask_login import current_user
+from flask_login import current_user,login_required
 @display.route('/')
 def show_post():
     posts = Upload.query.order_by(Upload.time.desc()).all()
@@ -11,6 +11,7 @@ def show_post():
 
 
 @display.route('/like/<postid>')
+@login_required
 def likes(postid):
     post_id = int(postid)
     add = Upload.query.filter_by(id=post_id).first()

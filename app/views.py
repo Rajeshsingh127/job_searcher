@@ -29,7 +29,6 @@ def upload():
 
 
 @app.route('/extended/<id>')
-@login_required
 def postextends(id):
     post = Upload.query.get(int(id))
     return render_template('extended.html',post=post)

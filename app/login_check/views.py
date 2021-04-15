@@ -13,7 +13,10 @@ def login_process():
     if form.validate_on_submit() and request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
-        remember_me =request.form['remember_me']
+        try:
+            remember_me =request.form['remember_me']
+        except:
+            remember_me = False
         user = User.query.filter_by(email=email).first()
         if user is not None and check_password_hash(user.password,password):
             login_user(user,remember=remember_me)

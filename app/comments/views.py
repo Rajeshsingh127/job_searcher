@@ -18,3 +18,17 @@ def comment_process():
         db.session.add(brr)
         db.session.commit()
         return redirect(request.referrer)
+
+
+
+
+@comments.route('/delete/<id>')
+@login_required
+def delete_process(id):
+        final = Comments.query.filter_by(id=id).first()
+        if final.poster.id == current_user.id:
+            db.session.delete(final)
+            db.session.commit()
+            return redirect(request.referrer)
+        else:
+            return redirect(request.referrer)

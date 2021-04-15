@@ -3,7 +3,7 @@ from flask_login import current_user,login_required
 from app.login_check.forms import Loginform,Signupform
 from app import db
 from app.profile import profile
-from app.models import Upload,Comments,User
+from app.models import Upload,Comments,User,Likes
 from werkzeug.security import check_password_hash
 
 
@@ -52,6 +52,13 @@ def delete_account():
 @login_required
 def delete():
     if  request.method == 'POST' and check_password_hash(current_user.password, request.form['password_confirm']):
+
+        for post in current_user.posts:
+            db.session.delete(post)
+        for comment in current_user.comment:
+            db.session.delete(comment)
+        for like in Likes.query.filter_by(userid=current_user.id).all():
+            db.session.delete(like)
         db.session.delete(current_user)
         db.session.commit()
         return redirect(url_for('display.show_post'))
