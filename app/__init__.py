@@ -8,7 +8,10 @@ app = Flask(__name__)
 log_in = LoginManager(app)
 log_in.login_view = 'login'
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+uri = os.environ.get('DATABASE_URL')
+if uri.startswith("postgres://") if uri else False:
+    uri = uri.replace("postgres://", "postgresql://", 1)
+app.config['SQLALCHEMY_DATABASE_URI'] = uri
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['MAX_CONTENT_LENGTH'] = 1024*1024
 app.config['UPLOAD_EXTENSIONS'] = ['.jpg','.png','.jpeg']
