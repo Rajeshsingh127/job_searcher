@@ -15,6 +15,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = uri
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['MAX_CONTENT_LENGTH'] = 1024*1024
 app.config['UPLOAD_EXTENSIONS'] = ['.jpg','.png','.jpeg']
+folder = os.path.abspath('app')
+if folder.startswith('app/app') if folder else False:
+    folder = folder.replace('/app/app','/app')
 app.config['UPLOAD_FOLDER'] = os.path.abspath('app')+'/static/images'
 db = SQLAlchemy(app)
 migrate = Migrate(app,db)
