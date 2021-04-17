@@ -27,7 +27,7 @@ def upload():
     return render_template('upload.html',form=form)
 
 
-
+#extends
 @app.route('/extended/<id>')
 def postextends(id):
     post = Upload.query.get(int(id))
