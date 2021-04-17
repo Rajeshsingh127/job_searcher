@@ -18,7 +18,7 @@ app.config['UPLOAD_EXTENSIONS'] = ['.jpg','.png','.jpeg']
 folder = os.path.abspath('app')
 if folder.startswith('app/app') if folder else False:
     folder = folder.replace('/app/app','/app')
-app.config['UPLOAD_FOLDER'] = os.path.abspath('app')+'/static/images'
+app.config['UPLOAD_FOLDER'] = folder +'/static/images'
 db = SQLAlchemy(app)
 migrate = Migrate(app,db)
 from app.models import User,Upload
