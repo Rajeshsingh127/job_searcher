@@ -74,6 +74,7 @@ def delete_process():
     yolo = session['deletepost']
     query = Upload.query.filter_by(id=yolo).first()
     if query is not None:
+        os.remove(os.path.abspath('app')+query.pic)
         db.session.delete(query)
         db.session.commit()
         session.pop('deletepost',None)
