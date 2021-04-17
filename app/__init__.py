@@ -8,17 +8,22 @@ app = Flask(__name__)
 log_in = LoginManager(app)
 log_in.login_view = 'login'
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+
 uri = os.environ.get('DATABASE_URL')
 if uri.startswith("postgres://") if uri else False:
     uri = uri.replace("postgres://", "postgresql://", 1)
 app.config['SQLALCHEMY_DATABASE_URI'] = uri
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['MAX_CONTENT_LENGTH'] = 1024*1024
 app.config['UPLOAD_EXTENSIONS'] = ['.jpg','.png','.jpeg']
-folder = os.path.abspath('app')
+
+folder = str(os.path.abspath('app'))
 if folder.startswith('app/app') if folder else False:
     folder = folder.replace('/app/app','/app')
 app.config['UPLOAD_FOLDER'] = folder +'/static/images'
+
+
 db = SQLAlchemy(app)
 migrate = Migrate(app,db)
 from app.models import User,Upload
