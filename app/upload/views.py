@@ -1,11 +1,22 @@
 import os
+import json
+import cloudinary
+from cloudinary.uploader import upload
+from  cloudinary.utils import  cloudinary_url
 from app import app,Upload,db
 from flask import request,abort,redirect,url_for,current_app,render_template,session
 from flask_login import current_user,login_required
 from app.upload import upload
 from app.upload.forms import Uploadfeed
 from werkzeug.utils import secure_filename
+from dotenv import load_dotenv
+load_dotenv()
 
+cloudinary.config(
+    cloud_name = os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    api_key = os.environ.get('CLOUDINARY_API_KEY'),
+    api_secret = os.environ.get('CLOUDINARY_API_SECRET')
+)
 
 
 @upload.route('/', methods = ['POST'])
@@ -21,10 +32,11 @@ def upload_process():
                 file_ext = os.path.splitext(filename)[1]
                 if file_ext not in current_app.config['UPLOAD_EXTENSIONS']:
                     abort(400)
-                pic.save(os.path.join(current_app.config['UPLOAD_FOLDER'],filename))
+                '''pic.save(os.path.join(current_app.config['UPLOAD_FOLDER'],filename))
             address = '/static/images/{}'.format(filename)
-            #saving in db part
-            user = Upload(name=name,about=about,pic=address,author=current_user)
+            #saving in db part'''
+            jsondata = cloudinary.uploader.upload(pic,public_id='petbook/{}/{}'.format(current_user.id,filename))
+            user = Upload(name=name,about=about,pic=json.dumps(jsondata),author=current_user)
             db.session.add(user)
             db.session.commit()
         return redirect(url_for('display.show_post'))
@@ -80,3 +92,4 @@ def delete_process():
         session.pop('deletepost',None)
         return redirect(url_for('profile.profile_view',author=query.author.id))
     abort(400)
+

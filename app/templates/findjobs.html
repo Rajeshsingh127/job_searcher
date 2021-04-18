@@ -33,7 +33,7 @@
     <div class="extends">
     <a href="{{url_for('postextends',id=post.id)}}">
     <div>
-    <br><img src="{{ post.pic }}" width="150px" height="150px">
+    <br><img src="{{ post.pic['url'] }}" width="150px" height="150px">
     </div></a>
      <div><p>Likes: <a href="{{url_for('display.likes',postid=post.id)}}">{{post.likes}}</a> </p></div>
     <div><p>Pet name: {{post.name}}</p></div>
