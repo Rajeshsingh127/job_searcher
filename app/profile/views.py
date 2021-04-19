@@ -76,6 +76,6 @@ def profile_view(author):
     user = User.query.filter_by(id=author).first()
 
     if user is not None and user.id != current_user.id:
-        return render_template('userprofile.html',user=user)
+        return render_template('userprofile.html',user=user,json=json)
     else:
         return redirect(url_for('profile.display_profile'))
