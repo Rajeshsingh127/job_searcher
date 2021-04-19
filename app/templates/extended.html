@@ -3,7 +3,7 @@
 {% block title %}Post Details{% endblock %}
 {% block content %}
 
-    <div><img src="{{ post.pic }}" width="150px" height="150px"></div>
+    <div><img src="{{ json.loads(post.pic)['url'] }}" width="150px" height="150px"></div>
     <div><p>Likes: <a href="{{url_for('display.likes',postid=post.id)}}">{{post.likes}}</a> </p></div>
     <div><p>Pet name: {{post.name}}</p></div>
     <div><p>Owner: {{post.author.name}}</p></div>

@@ -1,3 +1,4 @@
+import json
 from flask import redirect,url_for,session,render_template,request
 from app import db
 from app.display import display
@@ -7,7 +8,7 @@ from flask_login import current_user,login_required
 def show_post():
     posts = Upload.query.order_by(Upload.time.desc()).all()
 
-    return render_template('findjobs.html',posts=posts)
+    return render_template('findjobs.html',posts=posts,json=json)
 
 
 @display.route('/like/<postid>')

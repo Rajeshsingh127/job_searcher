@@ -1,3 +1,4 @@
+import json
 from flask import redirect,url_for,session,render_template,request
 from flask_login import current_user,login_required
 from app.login_check.forms import Loginform,Signupform
@@ -13,7 +14,7 @@ from werkzeug.security import check_password_hash
 def display_profile():
     user = current_user
     if user is not None:
-        return render_template('userprofile.html',user=user)
+        return render_template('userprofile.html',user=user,json=json)
 
 @profile.route('/edit')
 @login_required

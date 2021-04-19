@@ -1,3 +1,4 @@
+import json
 from app import app
 from flask import render_template,request,url_for,redirect,session
 from flask_login import login_required,current_user
@@ -31,4 +32,4 @@ def upload():
 @app.route('/extended/<id>')
 def postextends(id):
     post = Upload.query.get(int(id))
-    return render_template('extended.html',post=post)
+    return render_template('extended.html',post=post,json=json)
