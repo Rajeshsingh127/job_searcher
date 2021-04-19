@@ -8,6 +8,7 @@ from flask import request,abort,redirect,url_for,current_app,render_template,ses
 from flask_login import current_user,login_required
 from app.upload import upload
 from app.upload.forms import Uploadfeed
+from app.models import Likes,User,Upload
 from werkzeug.utils import secure_filename
 from dotenv import load_dotenv
 load_dotenv()
@@ -35,7 +36,7 @@ def upload_process():
                 '''pic.save(os.path.join(current_app.config['UPLOAD_FOLDER'],filename))
             address = '/static/images/{}'.format(filename)
             #saving in db part'''
-            jsondata = cloudinary.uploader.upload(pic,public_id='petbook/{}/{}'.format(current_user.id,filename))
+            jsondata = cloudinary.uploader.upload(pic,public_id='local/{}/{}'.format(current_user.id,filename))
             keys_to_extract = ["url", "public_id"]
             subset = {key: jsondata[key] for key in keys_to_extract}
             user = Upload(name=name,about=about,pic=json.dumps(subset),author=current_user)
@@ -87,8 +88,14 @@ def delete_post(id):
 def delete_process():
     yolo = session['deletepost']
     query = Upload.query.filter_by(id=yolo).first()
+    likes = Likes.query.filter_by(post_id=yolo).all()
+    #likequery
     if query is not None:
         cloudinary.uploader.destroy(json.loads(query.pic)['public_id'])
+        for comment in query.comments:
+            db.session.delete(comment)
+        for like in likes:
+            db.session.delete(like)
         db.session.delete(query)
         db.session.commit()
         session.pop('deletepost',None)
