@@ -14,7 +14,7 @@
 
     <p>
     Pet's pic<br>
-    <img src="{{post.pic}}" width="150px" height="150px"><br>
+    <img src="{{json.loads(post.pic)['url']}}" width="150px" height="150px"><br>
     </p>
 
     <p>

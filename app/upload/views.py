@@ -49,7 +49,7 @@ def upload_process():
 def edit_post(id):
         post = Upload.query.filter_by(id=id).first()
         if post is not None and post.author.id == current_user.id:
-            return render_template('editpost.html',post=post)
+            return render_template('editpost.html',post=post,json=json)
         abort(400)
 
 @upload.route('/editprocess', methods = ['POST'])
@@ -77,7 +77,7 @@ def delete_post(id):
         post = Upload.query.filter_by(id=id).first()
         if post is not None and post.author.id == current_user.id:
             session['deletepost'] = post.id
-            return render_template('deletepost.html',post=post)
+            return render_template('deletepost.html',post=post,json=json)
 
         abort(400)
 
@@ -88,7 +88,7 @@ def delete_process():
     yolo = session['deletepost']
     query = Upload.query.filter_by(id=yolo).first()
     if query is not None:
-        os.remove(os.path.abspath('app')+query.pic)
+        cloudinary.uploader.destroy(json.loads(query.pic)['public_id'])
         db.session.delete(query)
         db.session.commit()
         session.pop('deletepost',None)
