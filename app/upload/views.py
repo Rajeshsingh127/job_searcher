@@ -36,7 +36,7 @@ def upload_process():
                 '''pic.save(os.path.join(current_app.config['UPLOAD_FOLDER'],filename))
             address = '/static/images/{}'.format(filename)
             #saving in db part'''
-            jsondata = cloudinary.uploader.upload(pic,public_id='local/{}/{}'.format(current_user.id,filename))
+            jsondata = cloudinary.uploader.upload(pic,public_id='petbook/{}/{}'.format(current_user.id,filename))
             keys_to_extract = ["url", "public_id"]
             subset = {key: jsondata[key] for key in keys_to_extract}
             user = Upload(name=name,about=about,pic=json.dumps(subset),author=current_user)
