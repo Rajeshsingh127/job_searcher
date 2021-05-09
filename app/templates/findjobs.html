@@ -2,55 +2,91 @@
 <html lang="en">
 <head>
 
+     <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="url_for('static', filename='main.css')">
-    <link   rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous">
-</script>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='main.css')}}">
+ <script type="text/javascript">
+$("#uploadTrigger").click(function(){
+   $("#uploadFile").click();
+});
+    </script>
+
 </head>
-<body>
-
-
-
-<a href="{{ url_for('display.show_post') }}">Gallery</a>
+<body class= "bg-light">
+<div class="container-fluid">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+    <a class="navbar-brand" href="#">PETBOOK</a>
+     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+    <div class="collapse navbar-collapse" id="padd">
+  <ul class="navbar-nav ml-auto">
+    <li class=" nav-item active">
+        <a class="nav-link" href="{{ url_for('display.show_post') }}">Gallery</a>
+    </li>
 {% if current_user.is_authenticated %}
-<a href="{{ url_for('upload') }}">Upload</a>
-<a href="{{ url_for('profile.display_profile') }}">Profile</a>
-<a href="{{ url_for('login.logout') }}">Logout</a>
+    <li class="nav-item">
+        <a class="nav-link"  href="{{ url_for('upload') }}">Upload</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('profile.display_profile') }}">Profile</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('login.logout') }}">Logout</a>
+    </li>
 {% else %}
-<a href="{{ url_for('login') }}">SignIn</a>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('login') }}">SignIn</a>
+    </li>
 {% endif %}
-<a href="#">About Us</a>
-{% block content %}
-<div class="post">
-{% for post in posts %}
-
-    <div class="extends">
-    <a href="{{url_for('postextends',id=post.id)}}">
-    <div>
-    <br><img src="{{ json.loads(post.pic)['url'] }}" width="150px" height="150px">
-    </div></a>
-     <div><p>Likes: <a href="{{url_for('display.likes',postid=post.id)}}">{{post.likes}}</a> </p></div>
-    <div><p>Pet name: {{post.name}}</p></div>
-    <div><p>Owner: <a href="{{url_for('profile.profile_view',author=post.author.id)}}">{{post.author.name}}</p></div>
-    {% if current_user.id == post.author.id %}
-        <a href="{{url_for('upload.edit_post',id=post.id)}}">edit </a>
-        <a href="{{url_for('upload.delete_post',id=post.id)}}">delete</a>
-    {% endif %}
+    <li class="nav-item">
+        <a class="nav-link" href="#">About Us</a>
+    </li>
+  </ul>
     </div>
+</nav>
+</div>
+{% block content %}
 
+<div class="container-fluid-sm">
+<div class="row">
+{% for post in posts %}
+    <div class=" card mx-5 mt-5 bg-light shadow" style="width: 18rem;">
+    <h6 class="card-header"><a href="{{url_for('profile.profile_view',author=post.author.id)}}">{{post.author.name.capitalize()}}</a></h6>
+    <img class ="card-img-top" src="{{ json.loads(post.pic)['url'] }}">
+        <div class="card-body">
+         <center><h5 class="card-text" style="font-family: 'Sans-serif'; color: #cc00ff;">{{post.name.capitalize()}}</h5></center>
+         <a href="{{url_for('display.likes',postid=post.id)}}" style="text-decoration: none; color: inherit;"><i class="{{'text-blue-600' if current_user in post.liked_by else 'text-gray-400'}} fa fa-thumbs-o-up fa-2x"></i>{{post.likes}}</a>
+         </div>
+      <div class="card-footer">
+    {% if current_user.id == post.author.id %}
+
+        <a class="btn btn-primary" href="{{url_for('upload.edit_post',id=post.id)}}">edit </a>
+        <a class="btn btn-primary" href="{{url_for('upload.delete_post',id=post.id)}}">delete</a>
+
+    {% endif %}
+
+     </div>
+     </div>
 
 {% endfor %}
 </div>
-
-
-{% endblock %}
+</div>
+    {% endblock %}
 </body>
 </html>

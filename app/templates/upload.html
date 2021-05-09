@@ -3,8 +3,11 @@
 {% block title %}Upload file{% endblock %}
 
 {% block content %}
-<div>
+<br>
+<br>
+<div class="upload shadow-lg p-3 mb-5 bg-white rounded">
 <form method="post" action="{{ url_for('upload.upload_process') }}", enctype="multipart/form-data">
+<h1 class="title">SHOW US YOUR PET</h1><br>
     {{ form.hidden_tag() }}
     <p>
     {{ form.name.label }}<br>
@@ -14,15 +17,18 @@
         {% endfor %}
     </p>
 
-    <p>
-    {{ form.pic.label }}<br>
+    <p >
+    <label class="custom-file-upload">
+    Upload your pets pic
     {{ form.pic }}<br>
+    </label>
         {% for error in form.name.errors %}
                 <span style="color: red;">{{error}}</span>
         {% endfor %}
+
     </p>
 
-    <p>
+    <p >
     {{ form.about.label }}<br>
     {{ form.about }}<br>
         {% for error in form.name.errors %}

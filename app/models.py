@@ -7,6 +7,7 @@ class User(UserMixin,db.Model):
     name = db.Column(db.String(40), nullable=False)
     email = db.Column(db.String(40),unique=True,nullable=False)
     password = db.Column(db.String(200), nullable=False)
+    liked_post = db.relationship('Likes', backref='liked_by', lazy='dynamic')
     posts = db.relationship('Upload',backref='author',lazy='dynamic')
     comment = db.relationship('Comments',backref='poster',lazy='dynamic')
     def __init__(self,name,email,password):
@@ -25,6 +26,7 @@ class Upload(UserMixin,db.Model):
     pic = db.Column(db.String(200),nullable=False)
     time = db.Column(db.DateTime,default=datetime.utcnow())
     likes = db.Column(db.Integer,default=0)
+    liked_by = db.relationship('Likes',backref='likedpost',lazy='dynamic')
     user_id = db.Column(db.Integer,db.ForeignKey('Userinfo.id'))
     comments = db.relationship('Comments',backref='post',lazy='dynamic')
 
