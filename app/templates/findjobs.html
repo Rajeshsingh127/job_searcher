@@ -19,11 +19,6 @@
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='main.css')}}">
- <script type="text/javascript">
-$("#uploadTrigger").click(function(){
-   $("#uploadFile").click();
-});
-    </script>
 
 </head>
 <body class= "bg-light">
@@ -33,7 +28,7 @@ $("#uploadTrigger").click(function(){
      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
   </button>
-    <div class="collapse navbar-collapse" id="padd">
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
   <ul class="navbar-nav ml-auto">
     <li class=" nav-item active">
         <a class="nav-link" href="{{ url_for('display.show_post') }}">Gallery</a>
