@@ -5,7 +5,7 @@
 {% block content %}
 <br>
 <br>
-<div class="upload shadow-lg p-3 mb-5 bg-white rounded">
+<div class="upload p-3 shadow">
 <form method="post" action="{{ url_for('upload.upload_process') }}", enctype="multipart/form-data">
 <h1 class="title">SHOW US YOUR PET</h1><br>
     {{ form.hidden_tag() }}
@@ -37,7 +37,7 @@
 
     </p>
 
-    <p>
+    <p class="submit">
     {{ form.submit }}<br>
         {% for error in form.name.errors %}
                 <span style="color: red;">{{error}}</span>

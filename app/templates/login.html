@@ -2,26 +2,20 @@
 
 {% block title %}SignIn{% endblock %}
 {% block content %}
-<div class="row">
-  <div class="col-md-3">
-    <a class="btn btn-outline-dark" href="{{ url_for('login_oauth.googlelogin')}}" role="button" style="text-transform:none">
+<div class="loginform p-5 shadow">
+    <h1>LOGIN </h1><br>
+    <a class="btn btn-outline-dark" href="{{ url_for('login_oauth.googlelogin')}}" role="button" style="text-transform:none; color: white;">
       <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
       Login with Google
     </a>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-3">
-      <a class="btn btn-outline-dark" href="{{ url_for('login_oauth.githublogin')}}" role="button" style="text-transform:none">
+      <a class="btn btn-outline-dark" href="{{ url_for('login_oauth.githublogin')}}" role="button" style="text-transform:none; color: white;">
       <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/512px-Octicons-mark-github.svg.png" />
       Login with Github
     </a>
-  </div>
-</div>
+<br><br><br>
+<hr>
+<br>
 
-
-
-<div>
     <form action="{{ url_for('login.login_process') }}" method="post">
          {{ form.hidden_tag() }}
         <p>
@@ -43,13 +37,13 @@
         </p>
 
         <p>
-                {{form.remember_me.label }}<br>
-                {{form.remember_me }}<br>
 
+                {{form.remember_me.label }}
+{{form.remember_me }}
 
 
         <p>
-                {{form.submit.label }}<br>
+
                 {{form.submit }}<br>
 
         </p>
