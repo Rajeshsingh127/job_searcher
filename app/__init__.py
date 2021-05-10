@@ -15,7 +15,7 @@ if uri.startswith("postgres://") if uri else False:
 app.config['SQLALCHEMY_DATABASE_URI'] = uri
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['MAX_CONTENT_LENGTH'] = 10*1024*1024
+app.config['MAX_CONTENT_LENGTH'] = 20*1024*1024
 app.config['UPLOAD_EXTENSIONS'] = ['.jpg','.png','.jpeg']
 
 #folder = str(os.path.abspath('app'))
