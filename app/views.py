@@ -33,3 +33,9 @@ def upload():
 def postextends(id):
     post = Upload.query.get(int(id))
     return render_template('extended.html',post=post,json=json)
+
+
+
+@app.route('/aboutme')
+def aboutme():
+    return render_template('aboutme.html')
