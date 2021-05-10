@@ -3,12 +3,17 @@
 {% block title %}Post Details{% endblock %}
 {% block content %}
 
-    <div><img class="mainimg" src="{{ json.loads(post.pic)['url'] }}" width="150px" height="150px"></div>
+    <img class="mainimg" src="{{ json.loads(post.pic)['url'] }}" width="150px" height="150px">
 <br><br>
     <h1 class="bruh" style='color: rgb(255, 85, 11);'><center><b>Hi! I am {{post.name}}</b></center></h1>
 <p style="filter: brightness(80%); color: white;  text-align: center;"><i>Date Posted: {{post.time.date()}}</i></p>
-<p style="color: white; text-align: center;">OWNER</p><p class="extends">{{post.author.name}}</p>
-<p style="color: white; text-align: center;">ABOUT</p><p  class="extends">{{post.about}}</p>
+
+<p style="color: white; text-align: center;">OWNER</p>
+<p class="extends">{{post.author.name}}</p>
+
+<p style="color: white; text-align: center;">ABOUT</p>
+<p  class="extends">{{post.about}}</p>
+
     <center>{% if current_user.id == post.author.id %}
             <a class="clickme" href="{{url_for('upload.edit_post',id=post.id)}}">edit </a>&nbsp;&nbsp;
             <a class="clickme" href="{{url_for('upload.delete_post',id=post.id)}}">delete</a>
