@@ -3,7 +3,7 @@
 {% block title %}Upload file{% endblock %}
 
 {% block content %}
-<div>
+<div class="upload p-3 shadow">
 <form method="post" action="{{ url_for('upload.edit_process')}}">
 
     <input type="hidden" name="id" value="{{post.id}}">
@@ -31,4 +31,5 @@
 
 </form>
 </div>
+
 {% endblock %}

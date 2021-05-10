@@ -3,41 +3,37 @@
 {% block title %}Post Details{% endblock %}
 {% block content %}
 
-    <div><img src="{{ json.loads(post.pic)['url'] }}" width="150px" height="150px"></div>
-    <div><p>Likes: <a href="{{url_for('display.likes',postid=post.id)}}">{{post.likes}}</a> </p></div>
-    <div><p>Pet name: {{post.name}}</p></div>
-    <div><p>Owner: {{post.author.name}}</p></div>
-    <div><p>ABOUT: {{post.about}}</p></div>
-    <div><p>Date Posted: {{post.time.date()}}</p></div>
-    <div>{% if current_user.id == post.author.id %}
-            <a href="{{url_for('upload.edit_post',id=post.id)}}">edit </a>
-            <a href="{{url_for('upload.delete_post',id=post.id)}}">delete</a>
+    <div><img class="mainimg" src="{{ json.loads(post.pic)['url'] }}" width="150px" height="150px"></div>
+<br><br>
+    <h1 class="bruh" style='color: rgb(255, 85, 11);'><center><b>Hi! I am {{post.name}}</b></center></h1>
+<p style="filter: brightness(80%); color: white;  text-align: center;"><i>Date Posted: {{post.time.date()}}</i></p>
+<p style="color: white; text-align: center;">OWNER</p><p class="extends">{{post.author.name}}</p>
+<p style="color: white; text-align: center;">ABOUT</p><p  class="extends">{{post.about}}</p></div>
+    <center>{% if current_user.id == post.author.id %}
+            <a class="clickme" href="{{url_for('upload.edit_post',id=post.id)}}">edit </a>&nbsp;&nbsp;
+            <a class="clickme" href="{{url_for('upload.delete_post',id=post.id)}}">delete</a>
          {% endif %}
-    </div>
-<hr>
-    <div class="comments">
-        <h3>COMMENTS</h3>
-        <hr>
+    </center><br><br>
+<h2 style='color: rgb(255, 85, 11);' class="bruh"><center><b>Leave your comment here!</b></center></h2>
+    <div class="upload p-3 shadow">
+
         {% for comment in post.comments %}
-        <h4>{{comment.poster.name}}</h4>
-        Posted on:{{comment.time.date()  }}</p>
-        <p>Comment: {{comment.comment}}</p>
+        <div class="indv">
+            <p>{{comment.comment}}</p><hr style="filter: brightness(50%);">
+          <div class="yoyo">
+           <p class="left extendonly">{{comment.poster.name}}</p>
+           <p class="right"> {{comment.time.date()  }}</p>
+          </div>
         {% if comment.userid == current_user.id %}
-        <a href="{{url_for('comments.delete_process',id=comment.id)}}">delete</a>
+        <a class="btndel" href="{{url_for('comments.delete_process',id=comment.id)}}"><i class="fa fa-trash  fa-2x" ></i></a>
         {% endif %}
-        <hr>
+        </div>
+        <br>
         {% endfor %}
-    </div>
 
-
-
-
-
-<div class="comments">
     <form method="post" action="{{ url_for('comments.comment_process') }}">
         <input type="hidden" name="postid" value="{{post.id}}">
-        enter comment:<br>
-        <textarea name="comment", rows="4", cols="50" required placeholder="Write your comment here"></textarea><br>
+        <textarea name="comment", rows="4", cols="50" required placeholder="Write your comment here"></textarea><br><br>
         <input type="submit" value="Add comment">
 
     </form>
