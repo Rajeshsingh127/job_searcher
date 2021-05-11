@@ -447,12 +447,10 @@ text-align: center;
 
 .aboutmeimg{
 width: 50%;
-height: 530px;
-object-fit: cover;
-object-position: 10% 30%;
+height: 540px;
 margin: 35px;
 float: left;
-
+position: relative;
 }
 .wow{
 color: white;
@@ -499,4 +497,18 @@ margin-left: 15px;
 }
 
 
+}
+
+.aboutmain{
+
+margin: 0 auto;
+}
+
+@media only screen and (max-width: 600px) {
+
+.bruhrow{
+margin-left: -48px;
+margin-right:  auto;
+
+}
 }
