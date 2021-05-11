@@ -4,6 +4,7 @@
 {% block content %}
 <div class="userprofile">
 <h1 class="name">{{user.name}}</h1>
+    <br>
 <center>
     {% if current_user.id == user.id %}
 
@@ -21,7 +22,7 @@
 <div class="container-fluid-sm">
 <div class="row">
 {% for post in user.posts %}
-    <div class=" card mx-5 mt-5 shadow" style="width: 18rem;">
+    <div class="finally card ml-5 mt-5 shadow" style="width: 18rem;">
     <h6 class="card-header"><a href="{{url_for('profile.profile_view',author=post.author.id)}}" style="color: white;">{{post.author.name.capitalize()}}</a></h6>
      <a href="{{url_for('postextends', id=post.id)}}"><img class ="card-img-top" src="{{ json.loads(post.pic)['url'] }}">
         <div class="card-body">

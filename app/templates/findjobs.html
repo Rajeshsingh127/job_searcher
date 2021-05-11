@@ -61,9 +61,9 @@
 {% block content %}
 
 <div class="container-fluid-sm">
-<div class="row bruhrow">
+<div class="row">
 {% for post in posts %}
-    <div class="card ml-5 mt-5 shadow cardwow" style="width: 18rem;">
+    <div class="card ml-5 mt-5 shadow finally" style="width: 18rem;">
     <h6 class="card-header"><a href="{{url_for('profile.profile_view',author=post.author.id)}}" style="color: white;">{{post.author.name.capitalize()}}</a></h6>
     <a href="{{url_for('postextends', id=post.id)}}"><img class ="card-img-top" src="{{ json.loads(post.pic)['url'] }}">
         <div class="card-body">

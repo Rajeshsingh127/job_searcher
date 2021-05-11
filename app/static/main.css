@@ -169,7 +169,7 @@ width: 50%;
   h1.name {
     width: 100%;
     padding: 10px;
-    font-size: 37px;
+    font-size: 36px;
     }
 }
 .editprofile {
@@ -350,7 +350,7 @@ color: white;
 
 .mainimg{
 width: 30%;
-height: 400px;
+height: auto;
 margin: 0 auto;
 display: block;
 border-radius: 16px;
@@ -363,7 +363,7 @@ box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.5);
 
 .mainimg{
 width: 90%;
-height: 300px;
+height: auto;
 }
 h1.bruh{
 font-size: 34px;
@@ -474,9 +474,8 @@ text-align: center;
 
 .aboutmeimg{
 width: 90%;
-height: 200px;
-object-fit: cover;
-object-position: 10% 30%;
+height: auto;
+
 margin: 15px;
 
 }
@@ -506,9 +505,13 @@ margin: 0 auto;
 
 @media only screen and (max-width: 600px) {
 
-.bruhrow{
-margin-left: -48px;
-margin-right:  auto;
+.finally{
+ margin: 25px auto !important;
+}
 
+p.textabout{
+
+font-size: 15px !important;
 }
 }
+
