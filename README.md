@@ -17,6 +17,10 @@ login and customisable user accounts.
   
   <li>Images are saved on cloudinary and are fetched through API endpoint</li>
   <li> DB used is MongoDB</li>
+  </ul>
+  
+  # OAUTH
+  User have facility to login with google or github account. Thanks to Oauth2.0 which has made it possible
   
     
  
